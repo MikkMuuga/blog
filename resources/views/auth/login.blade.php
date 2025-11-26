@@ -18,7 +18,7 @@
                 <!-- Email Address -->
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">@lang('Email')</legend>
-                    <input type="email" name="email" class="input" value="{{ old('email') }}"
+                    <input type="email" name="email" class="input input-bordered hover:input-accent hover:shadow-md transition-all" value="{{ old('email') }}"
                         placeholder="@lang('Email')" required autofocus autocomplete="username" />
                     @error('email')
                         <p class="label">{{ $message }}</p>
@@ -27,7 +27,7 @@
                 <!-- Password -->
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">@lang('Password')</legend>
-                    <input type="password" name="password" class="input" value="{{ old('password') }}"
+                    <input type="password" name="password" class="input input-bordered hover:input-accent hover:shadow-md transition-all" value="{{ old('password') }}"
                         placeholder="@lang('Password')" required autocomplete="current-password" />
                     @error('password')
                         <p class="label">{{ $message }}</p>
@@ -37,22 +37,21 @@
                 <!-- Remember Me -->
 
                 <fieldset class="fieldset w-64 p-4">
-                    <label class="label">
-                        <input name="remember" type="checkbox" class="checkbox" />
-                        @lang('Remember me')
+                    <label class="label text-base">
+                        <input name="remember" type="checkbox" class="checkbox checkbox-lg" />
+                        <span class="text-base">@lang('Remember me')</span>
                     </label>
                 </fieldset>
 
-                <div class="flex items-center justify-end mt-4">
+                <div class="flex flex-col items-center gap-4 mt-4">
+                    <button class="btn btn-primary w-full">
+                        {{ __('Log in') }}
+                    </button>
                     @if (Route::has('password.request'))
-                        <a class="link" href="{{ route('password.request') }}">
+                        <a class="link link-primary text-center text-sm" href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
-
-                    <button class="btn btn-primary ms-3">
-                        {{ __('Log in') }}
-                    </button>
                 </div>
             </form>
         </div>
