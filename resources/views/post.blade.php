@@ -3,7 +3,9 @@
 @section('content')
     @include('partials.post-card', ['full' => true])
 
-        @foreach ($post->comments as $comment)
+    {{-- Comment form moved into the post card partial so it appears inside the card when viewing the full post --}}
+
+    @foreach ($post->comments as $comment)
         <div class="card bg-base-300 shadow-sm my-2">
             <div class="card-body">
                 <p>{{ $comment->body }}</p>

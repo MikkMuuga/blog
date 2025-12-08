@@ -38,7 +38,6 @@ use Illuminate\Support\Facades\Auth;
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory;
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['title', 'body'];
@@ -49,21 +48,36 @@ class Post extends Model
         });
     }
 
-    public function authHasLiked(): Attribute {
+    public function displayBody(): Attribute {
         return Attribute::get(function () {
-            return $this->likes()->where('user_id', Auth::user()->id)->exists();
+            return nl2br(htmlspecialchars($this->body));
         });
     }
-        public function user() {
+
+    public function authHasLiked(): Attribute {
+        return Attribute::get(function () {
+            $userId = Auth::id();
+            if (is_null($userId)) {
+                return false;
+            }
+
+            return $this->likes()->where('user_id', $userId)->exists();
+        });
+    }
+
+    public function user() {
         return $this->belongsTo(User::class);
     }
-        public function comments() {
+
+    public function comments() {
         return $this->hasMany(Comment::class);
     }
-        public function tags() {
+
+    public function tags() {
         return $this->belongsToMany(Tag::class);
     }
-        public function likes() {
+
+    public function likes() {
         return $this->hasMany(Like::class);
     }
 }

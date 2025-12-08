@@ -29,5 +29,24 @@
                 <a href="{{route('post', $post)}}" class="btn btn-primary">Read More</a>
             @endif
         </div>
+        @isset($full)
+            @auth
+                <form id="comments-{{ $post->id }}" action="{{ route('comments.store', $post) }}" method="POST" class="mt-4">
+                    @csrf
+                    <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Add a comment</span>
+                        </label>
+                        <textarea id="comment-body-{{ $post->id }}" name="body" class="textarea textarea-bordered w-full" rows="3">{{ old('body') }}</textarea>
+                        @error('body')
+                            <p class="text-error mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-primary">Post Comment</button>
+                    </div>
+                </form>
+            @endauth
+        @endisset
     </div>
 </div>

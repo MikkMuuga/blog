@@ -14,6 +14,7 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/like/{post}', [PublicController::class, 'like'])->name('like');
+    Route::post('/post/{post}/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
     // Route::get('/admin/posts', [PostController::class, 'index'])->name('posts.index');
     // Route::get('/admin/posts/create', [PostController::class, 'create'])->name('posts.create');
     // Route::post('/admin/posts', [PostController::class, 'store'])->name('posts.store');
