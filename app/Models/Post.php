@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
@@ -48,9 +49,9 @@ class Post extends Model
         });
     }
 
-    public function displayBody(): Attribute {
+    public function authHasLiked(): Attribute {
         return Attribute::get(function () {
-            return nl2br(htmlspecialchars($this->body));
+            return $this->likes()->where('user_id', Auth::user()->id)->exists();
         });
     }
         public function user() {
@@ -61,5 +62,8 @@ class Post extends Model
     }
         public function tags() {
         return $this->belongsToMany(Tag::class);
+    }
+        public function likes() {
+        return $this->hasMany(Like::class);
     }
 }
