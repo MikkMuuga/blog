@@ -1,7 +1,7 @@
 @extends('partials.layout')
 @section('title', 'Posts')
 @section('content')
-<a href="{{ route('posts.create') }}" class="btn btn-primary">New Post</a>
+<a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
 @if(Route::is('posts.deleted'))
     <a href="{{ route('posts.index') }}" class="btn btn-secondary">All Posts</a>
 @else
@@ -37,7 +37,7 @@
                                     <button class="btn join-item btn-error">Perma Delete</button>
                                 </form>
                             @else
-                                <a class="btn join-item btn-info">View</a>
+                                <a href="{{ route('post', $post) }}" class="btn join-item btn-info">View</a>
                                 <a href="{{ route('posts.edit', $post) }}" class="btn join-item btn-warning">Edit</a>
                                 <form action="{{ route('posts.destroy', $post)}}" method="POST">
                                     @csrf

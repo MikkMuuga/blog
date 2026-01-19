@@ -33,6 +33,7 @@ class PostController extends Controller
     {
         $post = new Post($request->validated());
         $post->user()->associate(Auth::user());
+        $post->save();
         return redirect()->route('posts.index');
     }
 
@@ -70,7 +71,8 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
-    public function deleted(){
+    public function deleted()
+    {
         $posts = Post::onlyTrashed()->paginate();
         return view('posts.index', compact('posts'));
     }

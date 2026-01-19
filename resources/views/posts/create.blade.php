@@ -1,5 +1,5 @@
 @extends('partials.layout')
-@section('title', 'New Post')
+@section('title', 'Create Post')
 @section('content')
     <div class="card bg-base-300 w-1/2 mx-auto">
         <div class="card-body">
