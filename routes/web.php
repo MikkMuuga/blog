@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/post/{post}', [PublicController::class, 'post'])->name('post');
 Route::get('/category/{category}', [PublicController::class, 'category'])->name('category');
+Route::get('/user/{user}', [PublicController::class, 'user'])->name('user');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -16,6 +17,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/like/{post}', [PublicController::class, 'like'])->name('like');
     Route::post('/post/{post}/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
+    Route::get('/user/{user}/follow', [PublicController::class, 'follow'])->name('follow');
     // Route::get('/admin/posts', [PostController::class, 'index'])->name('posts.index');
     // Route::get('/admin/posts/create', [PostController::class, 'create'])->name('posts.create');
     // Route::post('/admin/posts', [PostController::class, 'store'])->name('posts.store');
